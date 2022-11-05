@@ -8,82 +8,36 @@
         </div>
 
         <div class="name-field">
-          <Input
-            :form_control="
-              isErr[0] ? 'g-form-control g-error' : 'g-form-control'
-            "
-            label_text="Firstname"
-            input_placeHolder="Mohammad Mohsen"
-            :msg_text="msg_err[0]"
-            input_type="text"
-            for_name="firstname"
-            ref="passwordRef"
-            v-model.trim="firstnameValue"
-          />
-          <Input
-            :form_control="
-              isErr[1] ? 'g-form-control g-error' : 'g-form-control'
-            "
-            label_text="Lastname"
-            input_placeHolder="Ahmadi"
-            :msg_text="msg_err[1]"
-            input_type="text"
-            for_name="lastname"
-            ref="passwordRef"
-            v-model.trim="lastnameValue"
-          />
+          <Input :form_control="
+            isErr[0] ? 'g-form-control g-error' : 'g-form-control'
+          " label_text="Firstname" input_placeHolder="Mohammad Mohsen" :msg_text="msg_err[0]" input_type="text"
+            for_name="firstname" ref="passwordRef" v-model.trim="firstnameValue" />
+          <Input :form_control="
+            isErr[1] ? 'g-form-control g-error' : 'g-form-control'
+          " label_text="Lastname" input_placeHolder="Ahmadi" :msg_text="msg_err[1]" input_type="text"
+            for_name="lastname" ref="passwordRef" v-model.trim="lastnameValue" />
         </div>
 
-        <Input
-          :form_control="isErr[2] ? 'g-form-control g-error' : 'g-form-control'"
-          label_text="Email"
-          input_placeHolder="yourname@example.com"
-          :msg_text="msg_err[2]"
-          input_type="text"
-          for_name="email"
-          ref="passwordRef"
-          v-model.trim="emailValue"
-        />
+        <Input :form_control="isErr[2] ? 'g-form-control g-error' : 'g-form-control'" label_text="Email"
+          input_placeHolder="yourname@example.com" :msg_text="msg_err[2]" input_type="text" for_name="email"
+          ref="passwordRef" v-model.trim="emailValue" />
         <div class="password-field">
-          <Input
-            :form_control="
-              isErr[3] ? 'g-form-control g-error' : 'g-form-control'
-            "
-            label_text="Password"
-            input_placeHolder="Password"
-            :msg_text="msg_err[3]"
-            input_type="password"
-            for_name="password"
-            ref="passwordRef"
-            v-model.trim="passwordValue"
-          />
-          <Input
-            :form_control="
-              isErr[4] ? 'g-form-control g-error' : 'g-form-control'
-            "
-            label_text="Confirm Password"
-            input_placeHolder="Password"
-            :msg_text="msg_err[4]"
-            input_type="password"
-            for_name="repassword"
-            ref="passwordRef"
-            v-model.trim="repasswordValue"
-          />
+          <Input :form_control="
+            isErr[3] ? 'g-form-control g-error' : 'g-form-control'
+          " label_text="Password" input_placeHolder="Password" :msg_text="msg_err[3]" input_type="password"
+            for_name="password" ref="passwordRef" v-model.trim="passwordValue" />
+          <Input :form_control="
+            isErr[4] ? 'g-form-control g-error' : 'g-form-control'
+          " label_text="Confirm Password" input_placeHolder="Password" :msg_text="msg_err[4]" input_type="password"
+            for_name="repassword" ref="passwordRef" v-model.trim="repasswordValue" />
         </div>
 
         <div class="policy-agreement">
-          <Checkbox
-            checkbox_label="I agree to Terms, Privacy Policy and Fees"
-            for_name="checkbox"
-          />
+          <Checkbox checkbox_label="I agree to Terms, Privacy Policy and Fees" for_name="checkbox" />
         </div>
 
         <div class="submit">
-          <Button
-            btn_text="Login"
-            class="g-btn g-btn-primary custom-btn"
-            @check="signUp"
-          />
+          <Button btn_text="Login" class="g-btn g-btn-primary custom-btn" @check="signUp" />
           <div class="divider">Or</div>
           <Button btn_text="Sign Up" class="g-btn g-btn-tertiary custom-btn" />
         </div>
@@ -120,9 +74,11 @@ export default {
     Input,
   },
   methods: {
+
     signUp() {
       const ele = document.querySelectorAll("#form input:not(#checkbox)");
       const eleArr = [...ele];
+      this.isErr = [];
       eleArr.forEach((inputValue) => {
         if (inputValue.value === "") {
           this.isErr.push(true);
@@ -131,16 +87,31 @@ export default {
               .slice(0, 1)
               .toUpperCase()}${inputValue.name.substring(1)} is required!`
           );
-        } else {
-          this.isErr.push(false);
-          const emailValidation = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if (inputValue.name == 'email' && inputValue.value.match(emailValidation)) {
-              console.log('worked!');
-          }
-        }
+        } else if (inputValue.name === 'repassword' && this.passwordValue !== inputValue) {
 
-        
+          // const emailValidation = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          //   if (inputValue.name == 'email' && inputValue.value.match(emailValidation)) {
+          //     console.log('worked!');
+          // }
+          this.isErr.push(true);
+          this.msg_err.push(
+            `Password doesn't match!`
+          )
+          // console.log(this.msg_err);
+          
+        }else {
+            // this.isErr = [];
+            this.isErr.push(false);
+            this.msg_err.push(
+              `${inputValue.name
+              .slice(0, 1)
+              .toUpperCase()}${inputValue.name.substring(1)} is ok`
+            )
+          }
+
+
       });
+      console.log(this.isErr);
     },
   },
 };

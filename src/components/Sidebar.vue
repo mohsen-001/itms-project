@@ -11,7 +11,7 @@
             <ul class="menu-list">
                 <li class="list"><i class="fa-solid fa-table-columns"></i><span>Dashboard</span></li>
                 <li class="list"><i class="fa-solid fa-bars-progress"></i><span>Tasks</span></li>
-                <li @click="collapsSidebar" class="list logout"><i
+                <li class="list logout"><i
                         class="fa-solid fa-right-from-bracket"></i><span>Logout</span></li>
             </ul>
         </div>
@@ -21,14 +21,17 @@
 <script>
 export default {
     name: 'side-bar',
+
     data() {
         return {
             userName: 'Mohsen Ahmadi',
         }
     },
+
+
     methods: {
         collapsSidebar() {
-            document.querySelector('#sidebar-cont').classList.toggle('collaps_sidebar');
+            document.querySelector("#sidebar-cont").classList.toggle("collaps_sidebar");
         }
     }
 

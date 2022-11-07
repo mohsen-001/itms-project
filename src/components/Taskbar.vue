@@ -1,26 +1,26 @@
 <template>
     <div>
-        
 
-            <div class="task-bar">
 
-                <div class="task-bar-header">
-                    <span>{{ task_bar_header }}</span>
-                    <div>
-                        <p>{{ task_bar_count }}</p>
-                    </div>
-                </div>
+        <div class="task-bar" :id="task_type">
 
-                <div class="task-bar-body">
-
-                    <button class="task-bar-add">+</button>
-
-                    <div class="task-bar-holder">
-
-                    </div>
-
+            <div class="task-bar-header">
+                <span>{{ task_bar_header }}</span>
+                <div>
+                    <p>{{ task_bar_count }}</p>
                 </div>
             </div>
+
+            <div class="task-bar-body">
+
+                <button class="task-bar-add">+</button>
+
+                <div class="task-bar-holder">
+                    <slot></slot>
+                </div>
+
+            </div>
+        </div>
 
 
     </div>
@@ -29,7 +29,7 @@
 <script>
 export default {
     name: "task-bar",
-    props: ["task_bar_header", "task_bar_count"]
+    props: ["task_bar_header", "task_bar_count", "task_type"]
 }
 </script>
 
@@ -94,9 +94,66 @@ export default {
 
 .task-bar .task-bar-body .task-bar-holder {
     width: 100%;
-    height: 63vh;
+    height: 65vh;
     overflow: auto;
     margin-top: 10px;
     padding: 5px 5px;
+    
+}
+
+.task-bar .task-bar-body .task-bar-holder > * {
+    margin: 10px 0;
+}
+
+.task-bar .task-bar-body .task-bar-holder:last-child, .task-bar .task-bar-body .task-bar-holder:first-child {
+    margin: 0 0 !important;
+}
+
+
+/* inprogress-theme */
+
+#inprogress-theme .task-bar-header {
+    background-color: var(--primary-color) !important;
+}
+
+#inprogress-theme :deep(.task-bar-item-subject) .fa-grip {
+    color: var(--primary-color);
+}
+
+#inprogress-theme :deep(.task-bar-item-body) {
+    background-color: rgba(71, 181, 255, 0.1);
+}
+
+/* inprogress-theme */
+
+#done-theme .task-bar-header {
+    background-color: #2EB100 !important;
+}
+
+#done-theme :deep(.task-bar-item-subject) .fa-grip {
+    color: #2EB100;
+}
+
+#done-theme :deep(.task-bar-item-body) {
+    background-color: rgba(46, 177, 0, 0.1);
+}
+
+
+
+/* scroll bar style */
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
 }
 </style>

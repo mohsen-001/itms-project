@@ -8,9 +8,27 @@
                 <Navbar @toggle="toggleSidebar" />
                 <div id="content">
                     <div class="task-container">
-                        <Taskbar task_bar_header="Todo" task_bar_count="3" />
-                        <Taskbar task_bar_header="Progress" task_bar_count="3" />
-                        <Taskbar task_bar_header="Completed" task_bar_count="3" />
+
+                        <!-- TODO -->
+                        <Taskbar task_bar_header="Todo" :task_bar_count="task_todo_count">
+                            <Task />
+                            <Task />
+
+                        </Taskbar>
+
+                        <!-- inprogress -->
+                        <Taskbar task_type="inprogress-theme" task_bar_header="Progress"
+                            :task_bar_count="task_progress_count">
+                            <Task />
+                        </Taskbar>
+
+                        <!-- completed -->
+                        <Taskbar task_type="done-theme" task_bar_header="Completed"
+                            :task_bar_count="task_complete_count">
+                            <Task />
+                            <Task />
+                            <Task />
+                        </Taskbar>
                     </div>
                 </div>
             </div>
@@ -22,13 +40,22 @@
 import Sidebar from '@/components/Sidebar.vue';
 import Navbar from '../components/Navbar.vue';
 import Taskbar from '../components/Taskbar.vue';
+import Task from '../components/Task.vue';
 
 export default {
     name: "Dashboard-page",
+    data() {
+        return {
+            task_todo_count: '0',
+            task_progress_count: '0',
+            task_complete_count: '0',
+        }
+    },
     components: {
         Sidebar,
         Navbar,
         Taskbar,
+        Task,
     },
     methods: {
         toggleSidebar() {
@@ -72,5 +99,10 @@ export default {
     display: flex;
     justify-content: space-between;
     margin-top: 25px;
+}
+
+.task-container>* {
+    flex: 1;
+    margin: 0 10px;
 }
 </style>

@@ -1,17 +1,17 @@
 <template>
     <div>
-        <div class="task-bar-item">
+        <div class="task-bar-item" v-for="(item,index) in task" :key="index">
             <div class="task-bar-item-subject">
                 <i class="fa-solid fa-grip"></i>
-                <div class="subject">Subject of the task</div>
+                <div class="subject">{{ item.subject}}</div>
                 <i class="fa-solid fa-up-right-from-square"></i>
             </div>
             <div class="task-bar-item-body">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                {{ item.body }}
             </div>
             <div class="task-bar-item-date">
-                <span class="update-date">2022-01-10</span>
-                <span class="update-time">16:30</span>
+                <span class="update-date">{{ item.date }}</span>
+                <span class="update-time">{{ item.time }}</span>
             </div>
         </div>
     </div>
@@ -19,6 +19,9 @@
 
 <script>
 export default {
+    props:{
+        task: Array,
+    },
     name: "task-item",
     data() {
         return {

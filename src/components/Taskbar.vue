@@ -15,7 +15,8 @@
 
                 <button @click="$emit('addClickBtn')" class="task-bar-add">+</button>
 
-                <div class="task-bar-holder">
+                <div class="task-bar-holder" :class="no_task? 'noTask' : ''">
+                    <p class="no_task_text">No Task</p>
                     <slot></slot>
                 </div>
 
@@ -29,11 +30,39 @@
 <script>
 export default {
     name: "task-bar",
-    props: ["task_bar_header", "task_bar_count", "task_type"]
+    props: ["task_bar_header", "task_bar_count", "task_type"],
+    data(){
+        return {
+            no_task: false,
+        }
+    },
+    updated(){
+        const taskHolderChild = document.querySelector('.task-bar-holder').children;
+        console.log(taskHolderChild.length - 1)
+        
+    }
 }
 </script>
 
 <style scoped>
+.no_task_text {
+    display: none;
+}
+.noTask {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    opacity: .9;
+    font-weight: 100;
+}
+
+.noTask .no_task_text {
+    display: block;
+}
+
+
+
 .task-title {
     display: flex;
     margin: 40px 0 20px 0;
@@ -93,7 +122,8 @@ export default {
 }
 
 .task-bar .task-bar-body .task-bar-holder {
-    width: 100%;
+    min-width: 400px;
+    /* max-width: 500px; */
     height: 65vh;
     overflow: auto;
     margin-top: 10px;

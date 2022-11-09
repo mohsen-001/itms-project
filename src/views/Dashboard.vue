@@ -10,25 +10,21 @@
                     <div class="task-container">
 
                         <!-- TODO -->
-                        <Taskbar task_bar_header="Todo" :task_bar_count="task_todo_count" task_type="todo" @addClickBtn="addTask">
-                            <Task />
-                            <Task />
-                            <Task />
-                         
+                        <Taskbar task_bar_header="Todo" :task_bar_count="task.length" task_type="todo"
+                            @addClickBtn="addTask(task)">
+                            <Task :task="task" />
+
                         </Taskbar>
 
                         <!-- inprogress -->
-                        <Taskbar task_type="inprogress-theme" task_bar_header="Progress"
-                            :task_bar_count="task_progress_count">
-                            <Task />
+                        <Taskbar task_type="inprogress-theme" task_bar_header="Progress" :task_bar_count="task1.length" @addClickBtn="addTask(task1)">
+                            <Task :task="task1" />
                         </Taskbar>
 
                         <!-- completed -->
-                        <Taskbar task_type="done-theme" task_bar_header="Completed"
-                            :task_bar_count="task_complete_count">
-                            <Task />
-                            <Task />
-                            <Task />
+                        <Taskbar task_type="done-theme" task_bar_header="Completed" :task_bar_count="task2.length" @addClickBtn="addTask(task2)">
+                            <Task :task="task2" />
+
                         </Taskbar>
                     </div>
                 </div>
@@ -47,9 +43,10 @@ export default {
     name: "Dashboard-page",
     data() {
         return {
-            task_todo_count: '0',
-            task_progress_count: '0',
-            task_complete_count: '0',
+            taskName: '',
+            task: [],
+            task1: [],
+            task2: [],
         }
     },
     components: {
@@ -62,22 +59,19 @@ export default {
         toggleSidebar() {
             this.$refs.navbar.collapsSidebar()
         },
-        
-        addTask(e) {
-            const btnPlace = e.target;
-            console.log(btnPlace);
+
+        addTask(taskName) {
+            taskName.unshift(
+                {
+                    subject: "Subject of the task1",
+                    body: "Lorem ipsum dolor, ",
+                    date: "2022-01-10",
+                    time: "16:30",
+                });
         }
-        
+
     },
-    mounted() {
-        
-            const todoTasks = document.querySelector("#todo .task-bar-holder").children;
-            const inprogressTasks = document.querySelector("#inprogress-theme .task-bar-holder").children;
-            const doneTasks = document.querySelector("#done-theme .task-bar-holder").children;
-            this.task_todo_count = todoTasks.length;
-            this.task_progress_count = inprogressTasks.length;
-            this.task_complete_count = doneTasks.length;
-    }
+
 };
 </script>
 
@@ -107,8 +101,6 @@ export default {
 }
 
 .task-container {
-    max-width: 95%;
-    height: auto;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     backdrop-filter: blur(10px);

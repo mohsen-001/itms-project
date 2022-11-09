@@ -30,16 +30,20 @@
 <script>
 export default {
     name: "task-bar",
-    props: ["task_bar_header", "task_bar_count", "task_type"],
+    props: ["task_bar_header", "task_bar_count", "task_type", "no_task"],
     data(){
         return {
-            no_task: false,
+            
         }
     },
     updated(){
-        const taskHolderChild = document.querySelector('.task-bar-holder').children;
-        console.log(taskHolderChild.length - 1)
-        
+        // const taskHolderChild = document.querySelector('.task-bar-holder').children;
+        // if (taskHolderChild <= 2) {
+        //     this.no_task = true;
+        // }else {
+        //     this.no_task = false;
+        // }
+        // console.log(taskHolderChild.length-2);
     }
 }
 </script>

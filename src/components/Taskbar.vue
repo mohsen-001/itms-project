@@ -13,7 +13,7 @@
 
             <div class="task-bar-body">
 
-                <button class="task-bar-add">+</button>
+                <button @click="$emit('addClickBtn')" class="task-bar-add">+</button>
 
                 <div class="task-bar-holder">
                     <slot></slot>

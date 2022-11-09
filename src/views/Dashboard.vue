@@ -10,10 +10,11 @@
                     <div class="task-container">
 
                         <!-- TODO -->
-                        <Taskbar task_bar_header="Todo" :task_bar_count="task_todo_count">
+                        <Taskbar task_bar_header="Todo" :task_bar_count="task_todo_count" task_type="todo" @addClickBtn="addTask">
                             <Task />
                             <Task />
-
+                            <Task />
+                         
                         </Taskbar>
 
                         <!-- inprogress -->
@@ -60,8 +61,23 @@ export default {
     methods: {
         toggleSidebar() {
             this.$refs.navbar.collapsSidebar()
+        },
+        
+        addTask(e) {
+            const btnPlace = e.target;
+            console.log(btnPlace);
         }
+        
     },
+    mounted() {
+        
+            const todoTasks = document.querySelector("#todo .task-bar-holder").children;
+            const inprogressTasks = document.querySelector("#inprogress-theme .task-bar-holder").children;
+            const doneTasks = document.querySelector("#done-theme .task-bar-holder").children;
+            this.task_todo_count = todoTasks.length;
+            this.task_progress_count = inprogressTasks.length;
+            this.task_complete_count = doneTasks.length;
+    }
 };
 </script>
 
@@ -84,12 +100,14 @@ export default {
     background-color: rgb(255, 203, 107);
 }
 
-/* #content {
-    background-color: rgb(129, 129, 129);
-} */
+#content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .task-container {
-    width: 100%;
+    max-width: 95%;
     height: auto;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 20px;

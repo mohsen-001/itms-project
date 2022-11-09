@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="task-bar-item" @click.right.prevent="showMenu">
+        <div class="task-bar-item">
             <div class="task-bar-item-subject">
                 <i class="fa-solid fa-grip"></i>
                 <div class="subject">Subject of the task</div>
@@ -14,14 +14,6 @@
                 <span class="update-time">16:30</span>
             </div>
         </div>
-
-        <div id="right_click" :class="show_menu?'showIt':''" v-show="show_menu">
-            <ul>
-                <li>Open</li>
-                <li>Delete</li>
-                <li>Edit</li>
-            </ul>
-        </div>
     </div>
 </template>
 
@@ -30,14 +22,10 @@ export default {
     name: "task-item",
     data() {
         return {
-            show_menu: false,
+            
         }
     },
-    methods: {
-        showMenu(){
-            this.show_menu = true;
-        }
-    }
+    methods: {}
 }
 </script>
 

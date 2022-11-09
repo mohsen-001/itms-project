@@ -87,17 +87,14 @@ export default {
               .slice(0, 1)
               .toUpperCase()}${inputValue.name.substring(1)} is required!`
           );
-        } else if (inputValue.name === 'repassword' && this.passwordValue !== inputValue) {
+        } else if (inputValue.name == 'repassword' && this.passwordValue != inputValue.value) {
 
-          // const emailValidation = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          //   if (inputValue.name == 'email' && inputValue.value.match(emailValidation)) {
-          //     console.log('worked!');
-          // }
+         
           this.isErr.push(true);
           this.msg_err.push(
             `Password doesn't match!`
           )
-          // console.log(this.msg_err);
+          // console.log(inputValue.value, inputValue.name);
           
         }else {
             // this.isErr = [];

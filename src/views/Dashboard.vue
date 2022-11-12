@@ -1,6 +1,7 @@
 <template>
     <div>
         <div id="container">
+            <TaskInsert />
             <div id="sidebar">
                 <Sidebar ref="navbar" />
             </div>
@@ -10,20 +11,20 @@
                     <div class="task-container">
 
                         <!-- TODO -->
-                        <Taskbar task_bar_header="Todo" :task_bar_count="task.length" :no_task="emptyTask[0]"
+                        <Taskbar task_bar_header="Todo" :task_bar_count="task.length"
                             task_type="todo" @addClickBtn="addTask(task)">
                             <Task :task="task" />
 
                         </Taskbar>
 
                         <!-- inprogress -->
-                        <Taskbar task_type="inprogress-theme" task_bar_header="Progress" :no_task="emptyTask[1]"
+                        <Taskbar task_type="inprogress-theme" task_bar_header="Progress"
                             :task_bar_count="task1.length" @addClickBtn="addTask(task1)">
                             <Task :task="task1" />
                         </Taskbar>
 
                         <!-- completed -->
-                        <Taskbar task_type="done-theme" task_bar_header="Completed" :no_task="emptyTask[2]"
+                        <Taskbar task_type="done-theme" task_bar_header="Completed"
                             :task_bar_count="task2.length" @addClickBtn="addTask(task2)">
                             <Task :task="task2" />
 
@@ -40,16 +41,18 @@ import Sidebar from '@/components/Sidebar.vue';
 import Navbar from '../components/Navbar.vue';
 import Taskbar from '../components/Taskbar.vue';
 import Task from '../components/Task.vue';
+import TaskInsert from '../components/TaskInsert.vue';
 
 export default {
     name: "Dashboard-page",
     data() {
         return {
             taskName: '',
+            childs: null,
             task: [],
             task1: [],
             task2: [],
-            emptyTask: [true, true, true],
+           
         }
     },
     components: {
@@ -57,42 +60,17 @@ export default {
         Navbar,
         Taskbar,
         Task,
+        TaskInsert
     },
+
     methods: {
         toggleSidebar() {
             this.$refs.navbar.collapsSidebar()
         },
 
 
-        checkEmptyTask() {
-            const holder = document.querySelectorAll('.task-bar-holder');
-            // const holderArr = [...holder]
-            console.log(holder.length);
-            this.emptyTask = [];
-
-            holder.forEach(item => {
-                if (item.children.length - 2 <= 0) {
-                    this.emptyTask.push(true);
-                    console.log(item.children, "first");
-                } else {
-                    this.emptyTask.push(false);
-                    console.log(item.children.length, "second");
-                }
-            })
-
-            console.log(this.emptyTask);
-            // const toDoHolderChild = document.querySelector('#todo .task-bar-holder').children;
-            // const inprogressHolderChild = document.querySelector('#inprogress-theme .task-bar-holder').children;
-            // const doneHolderChild = document.querySelector('#done-theme .task-bar-holder').children;
-            // if (toDoHolderChild <= 2) {
-            //     this.emptyTask = true;
-            // }else {
-            //     this.emptyTask = false;
-            // }
-        },
-
         addTask(taskName) {
-            
+
             taskName.unshift(
                 {
                     subject: "Subject of the task1",
@@ -101,12 +79,10 @@ export default {
                     time: "16:30",
                 });
 
-                this.checkEmptyTask();
-            
-        }
+
+        },
 
     },
-
 
 
 };

@@ -14,8 +14,9 @@
             <div class="task-bar-body">
 
                 <button @click="$emit('addClickBtn')" class="task-bar-add">+</button>
+                <!-- :class="no_task ? 'noTask' : ''" -->
 
-                <div class="task-bar-holder" :class="no_task? 'noTask' : ''">
+                <div class="task-bar-holder" >
                     <p class="no_task_text">No Task</p>
                     <slot></slot>
                 </div>
@@ -29,22 +30,35 @@
 
 <script>
 export default {
-    name: "task-bar",
-    props: ["task_bar_header", "task_bar_count", "task_type", "no_task"],
-    data(){
+    data() {
         return {
-            
+            // taskChilds: 0,
         }
     },
-    updated(){
-        // const taskHolderChild = document.querySelector('.task-bar-holder').children;
-        // if (taskHolderChild <= 2) {
-        //     this.no_task = true;
-        // }else {
-        //     this.no_task = false;
+
+    name: "task-bar",
+
+    props: ["task_bar_header", "task_bar_count", "task_type", "no_task"],
+
+    
+
+    methods: {
+        // checkChild() {
+        //     const holder = document.querySelector('.task-bar-holder div');
+        //     const holderArr = [...holder];
+           
+        //         if (holder.length == 0) {
+        //             this.emptyTask.push(true);
+        //             // console.log(item.children.length, "first");
+        //         } else {
+        //             this.emptyTask.push(false);
+        //             // console.log(item.children.length, "second");
+        //         }
+           
         // }
-        // console.log(taskHolderChild.length-2);
     }
+
+
 }
 </script>
 
@@ -52,6 +66,7 @@ export default {
 .no_task_text {
     display: none;
 }
+
 .noTask {
     display: flex;
     justify-content: center;
@@ -132,14 +147,15 @@ export default {
     overflow: auto;
     margin-top: 10px;
     padding: 5px 5px;
-    
+
 }
 
-.task-bar .task-bar-body .task-bar-holder > * {
+.task-bar .task-bar-body .task-bar-holder>* {
     margin: 10px 0;
 }
 
-.task-bar .task-bar-body .task-bar-holder:last-child, .task-bar .task-bar-body .task-bar-holder:first-child {
+.task-bar .task-bar-body .task-bar-holder:last-child,
+.task-bar .task-bar-body .task-bar-holder:first-child {
     margin: 0 0 !important;
 }
 

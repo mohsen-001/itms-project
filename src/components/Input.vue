@@ -21,9 +21,9 @@ export default {
     updateValue(value) {
       this.$emit("input", value);
     },
-    checkEmail() {
-      console.log("hey");
-    },
+    // checkEmail() {
+    //   console.log("hey");
+    // },
   },
 };
 </script>

@@ -25,7 +25,7 @@ export default {
     name: "task-item",
     data() {
         return {
-            
+            values: [],
         }
     },
     methods: {}

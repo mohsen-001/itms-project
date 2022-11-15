@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="container">
-            <TaskInsert />
+            <TaskInsert @add="checkit" v-model.trim="taskSubject"/>
             <div id="sidebar">
                 <Sidebar ref="navbar" />
             </div>
@@ -52,7 +52,7 @@ export default {
             task: [],
             task1: [],
             task2: [],
-           
+            taskSubject: "",
         }
     },
     components: {
@@ -81,6 +81,12 @@ export default {
 
 
         },
+
+        checkit(){
+            console.log('hey');
+            console.log(this.taskSubject);
+            // console.log(this.taskSubject);
+        }
 
     },
 
